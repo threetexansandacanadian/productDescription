@@ -45,4 +45,4 @@ const updateEntry = (productId, product, cb) => {
     });
 };
 
-module.exports = {addNew, getAll};
+module.exports = {addNew, getAll, updateEntry};
