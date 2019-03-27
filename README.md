@@ -4,10 +4,10 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/threetexansandacanadian/repo
+  - https://github.com/threetexansandacanadian/repo
+  - https://github.com/threetexansandacanadian/repo
+  - https://github.com/threetexansandacanadian/repo
 
 ## Table of Contents
 
