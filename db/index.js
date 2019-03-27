@@ -35,4 +35,14 @@ const getAll = (cb) => {
     });
 };
 
+const updateEntry = (productId, product, cb) => {
+  Desc.findByIdAndUpdate(productId, product)
+    .then(() => {
+      cb(null);
+    })
+    .catch(err => {
+      cb(err);
+    });
+};
+
 module.exports = {addNew, getAll};
