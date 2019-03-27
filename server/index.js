@@ -28,6 +28,19 @@ app.post('/api/products', (req, res) => {
   });
 });
 
+app.patch('/api/products', (req, res) => {
+  const productId = req.body.id;
+  const product = req.body.product;
+  db.updateEntry(productId, product, (err) => {
+    if (err) {
+      console.log('SERVER: Failed to update item', err);
+      res.send('Failed to updatate');
+    } else {
+      res.send('Update');
+    }
+  });
+});
+
 
 
 app.listen(PORT, () => {
