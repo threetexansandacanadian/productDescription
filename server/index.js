@@ -19,8 +19,14 @@ app.get('/api/products', (req, res) => {
 
 app.get('/api/products/id', (req, res) => {
   const productId = req.query.id;
-  console.log(productId)
-  res.send('Papa dapa gapa')
+  db.getOne(productId, (err, results) => {
+    if (err) {
+      console.log('SERVER: Failed to get one product', err);
+      res.send('Failed to get one')
+    } else {
+      res.send(results);
+    }
+  })
 })
 
 app.post('/api/products', (req, res) => {

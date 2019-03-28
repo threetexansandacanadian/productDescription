@@ -26,6 +26,16 @@ const addNew = (product, cb) => {
     });
 };
 
+const getOne = (productId, cb) => {
+  Desc.findOne({productID: productId})
+    .then(results => {
+      cb(null, results);
+    })
+    .catch(err => {
+      cb(err);
+    })
+}
+
 const getAll = (cb) => {
   Desc.find()
     .then(results => {
@@ -66,4 +76,4 @@ const massAddNew = (products, cb) => {
     });
 };
 
-module.exports = {addNew, getAll, updateEntry, removeEntry, massAddNew};
+module.exports = {addNew, getOne, getAll, updateEntry, removeEntry, massAddNew};
