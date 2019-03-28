@@ -9,8 +9,18 @@ class ProdDesc extends Component {
     }
   }
 
+  componentDidMount() {
+    this.getProduct(1);
+  }
+
   getProduct(productId) {
-    axios.get(`127.0.0.1:65535/api/products`)
+    axios.get(`localhost:65535/api/products/id?id={productId}`)
+    .then(result => {
+      this.setState({currentPoduct: result}, console.log(this.state.currentPoduct));
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
 
