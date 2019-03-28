@@ -4,6 +4,7 @@ const app = express();
 const PORT = 65535;
 
 app.use(express.json({urlencoded: true}));
+app.use(express.static('./dist/'))
 
 app.get('/api/products', (req, res) => {
   db.getAll((err, data) => {
