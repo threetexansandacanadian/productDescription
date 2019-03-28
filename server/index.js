@@ -9,37 +9,45 @@ app.use(express.static('./dist/'));
 
 app.get('/api/products', (req, res) => {
   db.getAll()
-    .then(res.send)
-    .catch(() => res.send('Failed to get all'));
+    .then(results => res.send(results))
+    .catch(err => res.send('Failed to get all', err));
 });
 
 app.get('/api/products/id', (req, res) => {
   const productId = req.query.id;
   db.getOne(productId)
-    .then(res.send)
+    .then(result => res.send(result))
     .catch(res.end);
 });
 
 app.post('/api/products', (req, res) => {
   const product = req.body;
   db.addNew(product)
-    .then(res.send)
-    .catch(res.end);
+    .then(() => res.sen())
+    .catch(() => res.end());
 });
 
 app.patch('/api/products', (req, res) => {
-  const productId = req.body.id;
-  const { product } = req.body;
+  const productId = req.body.productID;
+  const product = req.body;
+  delete product._id;
   db.updateEntry(productId, product)
-    .then(res.send)
-    .catch(res.end);
+    .then(() => res.end())
+    .catch(() => res.end());
 });
 
-app.delete('/api/products', (req, res) => {
-  const { id } = req.body;
-  db.removeEntry(id)
-    .then(res.send)
-    .catch(res.end);
+app.delete('/api/products/id', (req, res) => {
+  const productId = req.query.id;
+  db.removeEntry(Number(productId))
+    .then(() => res.end())
+    .catch(() => res.end());
+});
+
+app.post('/api/products/secret', (req, res) => {
+  const products = req.body;
+  db.massAddNew(products)
+    .then(() => res.end())
+    .catch(() => res.end());
 });
 
 

@@ -25,9 +25,9 @@ const getOne = productId => Desc.findOne({ productID: productId });
 
 const getAll = () => Desc.find();
 
-const updateEntry = (productId, product) => Desc.findOneAndUpdate(productId, product);
+const updateEntry = (ID, product) => Desc.findOneAndUpdate({ productID: ID }, product);
 
-const removeEntry = productId => Desc.findOneAndDelete(productId);
+const removeEntry = productId => Desc.findOneAndDelete({ productID: productId });
 
 const massAddNew = products => Desc.insertMany(products);
 
