@@ -1,6 +1,7 @@
 const moongoose = require('mongoose');
+
 moongoose.Promise = global.Promise;
-moongoose.connect('mongodb://localhost/productDescription', {useNewUrlParser: true});
+moongoose.connect('mongodb://localhost/productDescription', { useNewUrlParser: true });
 
 const dbSchema = moongoose.Schema({
   name: 'String',
@@ -10,60 +11,26 @@ const dbSchema = moongoose.Schema({
   bulletThree: 'String',
   sellerName: 'String',
   description: 'String',
-  productID: 'Number'
+  productID: 'Number',
 });
 
 const Desc = moongoose.model('Desc', dbSchema);
 
-const addNew = (product, cb) => {
+const addNew = (product) => {
   const newProduct = new Desc(product);
-  newProduct.save()
-    .then(() => {
-      cb(null, 'Success');
-    })
-    .catch(err => {
-      cb(err);
-    });
+  return newProduct.save();
 };
 
-const getAll = (cb) => {
-  Desc.find()
-    .then(results => {
-      cb(null, results);
-    })
-    .catch(err => {
-      cb(err);
-    });
-};
+const getOne = productId => Desc.findOne({ productID: productId });
 
-const updateEntry = (productId, product, cb) => {
-  Desc.findOneAndUpdate(productId, product)
-    .then(() => {
-      cb(null);
-    })
-    .catch(err => {
-      cb(err);
-    });
-};
+const getAll = () => Desc.find();
 
-const removeEntry = (productId, cb) => {
-  Desc.findOneAndDelete(productId)
-    .then(() => {
-      cb(null);
-    })
-    .catch(err => {
-      cb(err);
-    });
-};
+const updateEntry = (ID, product) => Desc.findOneAndUpdate({ productID: ID }, product);
 
-const massAddNew = (products, cb) => {
-  Desc.insertMany(products) 
-    .then(() => {
-      cb(null);
-    })
-    .catch(err => {
-      cb(err);
-    });
-};
+const removeEntry = productId => Desc.findOneAndDelete({ productID: productId });
 
-module.exports = {addNew, getAll, updateEntry, removeEntry, massAddNew};
+const massAddNew = products => Desc.insertMany(products);
+
+module.exports = {
+  addNew, getOne, getAll, updateEntry, removeEntry, massAddNew,
+};

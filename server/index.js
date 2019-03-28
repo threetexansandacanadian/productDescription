@@ -1,59 +1,54 @@
 const express = require('express');
 const db = require('../db/index.js');
+
 const app = express();
 const PORT = 65535;
 
-app.use(express.json({urlencoded: true}));
+app.use(express.json({ urlencoded: true }));
+app.use(express.static('./dist/'));
 
 app.get('/api/products', (req, res) => {
-  db.getAll((err, data) => {
-    if (err) {
-      console.log('SERVER: Failed to get data', err);
-      res.send('Failed to get');
-    } else {
-      res.send(data);
-    }
-  });
+  db.getAll()
+    .then(results => res.send(results))
+    .catch(err => res.send('Failed to get all', err));
+});
+
+app.get('/api/products/id', (req, res) => {
+  const productId = req.query.id;
+  db.getOne(productId)
+    .then(result => res.send(result))
+    .catch(res.end);
 });
 
 app.post('/api/products', (req, res) => {
   const product = req.body;
-  db.addNew(product, (err) => {
-    if (err) {
-      console.log('SERVER: Failed to post data', err); 
-      res.send('Failed to post');
-    } else {
-      res.send('Success');
-    }
-  });
+  db.addNew(product)
+    .then(() => res.send())
+    .catch(() => res.end());
 });
 
 app.patch('/api/products', (req, res) => {
-  const productId = req.body.id;
-  const product = req.body.product;
-  db.updateEntry(productId, product, (err) => {
-    if (err) {
-      console.log('SERVER: Failed to update item', err);
-      res.send('Failed to update');
-    } else {
-      res.send('Update');
-    }
-  });
+  const productId = req.body.productID;
+  const product = req.body;
+  delete product._id;
+  db.updateEntry(productId, product)
+    .then(() => res.end())
+    .catch(() => res.end());
 });
 
-app.delete('/api/products', (req, res) => {
-  const id = req.body.id;
-  db.removeEntry(id, (err) => {
-    if (err) {
-      console.log('SERVER: Failed to delete item', err);
-      res.send('Failed to delete');
-    } else {
-      res.send('Deleted');
-    }
-  });
+app.delete('/api/products/id', (req, res) => {
+  const productId = req.query.id;
+  db.removeEntry(Number(productId))
+    .then(() => res.end())
+    .catch(() => res.end());
+});
+
+app.post('/api/products/secret', (req, res) => {
+  const products = req.body;
+  db.massAddNew(products)
+    .then(() => res.end())
+    .catch(() => res.end());
 });
 
 
-app.listen(PORT, () => {
-  console.log('Listening on port ' + PORT);
-});
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
