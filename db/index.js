@@ -9,7 +9,8 @@ const dbSchema = moongoose.Schema({
   bulletTwo: 'String',
   bulletThree: 'String',
   sellerName: 'String',
-  description: 'String'
+  description: 'String',
+  productID: 'Number'
 });
 
 const Desc = moongoose.model('Desc', dbSchema);
@@ -36,7 +37,7 @@ const getAll = (cb) => {
 };
 
 const updateEntry = (productId, product, cb) => {
-  Desc.findByIdAndUpdate(productId, product)
+  Desc.findOneAndUpdate(productId, product)
     .then(() => {
       cb(null);
     })
@@ -45,4 +46,24 @@ const updateEntry = (productId, product, cb) => {
     });
 };
 
-module.exports = {addNew, getAll, updateEntry};
+const removeEntry = (productId, cb) => {
+  Desc.findOneAndDelete(productId)
+    .then(() => {
+      cb(null);
+    })
+    .catch(err => {
+      cb(err);
+    });
+};
+
+const massAddNew = (products, cb) => {
+  Desc.insertMany(products) 
+    .then(() => {
+      cb(null);
+    })
+    .catch(err => {
+      cb(err);
+    });
+};
+
+module.exports = {addNew, getAll, updateEntry, removeEntry, massAddNew};
