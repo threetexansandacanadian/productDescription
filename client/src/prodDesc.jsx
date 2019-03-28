@@ -5,23 +5,8 @@ class ProdDesc extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProduct: {
-        "_id": "5c9d29a61596fd8ae892cfb8",
-        "name": "Maple Syrup",
-        "price": 10.25,
-        "bulletOne": "Delicious Canadian Nectar",
-        "bulletTwo": "Great with cereal",
-        "bulletThree": "Getnly milked from the sturdiest of trees",
-        "sellerName": "Quebec",
-        "description": "This isn't aunt gemimas crap. The greatest thing since forever ago.",
-        "productID": 1,
-        "__v": 0
+      currentProduct: this.getProduct(72)
     }
-    }
-  }
-
-  componentDidMount() {
-    this.getProduct(99);
   }
 
   getProduct(productId) {
@@ -30,10 +15,10 @@ class ProdDesc extends Component {
     .catch(err => console.log(err))
   }
 
-
   render() {
-    return (
-      <>
+    if (this.state.currentProduct) {
+      return (
+        <>
         <h1>{this.state.currentProduct.name}</h1>
         <h3>{this.state.currentProduct.sellerName}</h3>
         <h3>${this.state.currentProduct.price}</h3>
@@ -45,6 +30,12 @@ class ProdDesc extends Component {
         <p>{this.state.currentProduct.description}</p>
       </>
     )
+  } else {
+    return (
+      <> 
+      </>
+    )
+  }
   }
 }
 
