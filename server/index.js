@@ -17,6 +17,12 @@ app.get('/api/products', (req, res) => {
   });
 });
 
+app.get('/api/products/id', (req, res) => {
+  const productId = req.query.id;
+  console.log(productId)
+  res.send('Papa dapa gapa')
+})
+
 app.post('/api/products', (req, res) => {
   const product = req.body;
   db.addNew(product, (err) => {
