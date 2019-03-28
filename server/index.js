@@ -23,7 +23,7 @@ app.get('/api/products/id', (req, res) => {
 app.post('/api/products', (req, res) => {
   const product = req.body;
   db.addNew(product)
-    .then(() => res.sen())
+    .then(() => res.send())
     .catch(() => res.end());
 });
 
