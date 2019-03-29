@@ -47,7 +47,7 @@ app.patch('/api/products', (req, res) => {
 app.delete('/api/products/id', (req, res) => {
   const productId = req.query.id;
   db.removeEntry(Number(productId))
-    .then(() => res.end())
+    .then(() => res.sendStatus(204))
     .catch(() => res.end());
 });
 

@@ -1,4 +1,5 @@
 const request = require('supertest');
+const assert = require('assert');
 const app = require('../server/app.js');
 
 const product = {
@@ -23,49 +24,97 @@ const updatedProduct = {
   productID: '1001',
 };
 
-describe('Test all server routes', () => {
-  // beforeEach(() => {
-  //   moxios.install();
-  // });
-
-  // afterEach(() => {
-  //   moxios.uninstall();
-  // });
-
-  it('Root should respond with status of 200', (res) => {
+describe('Server routes should send a response', () => {
+  it('Should Root should respond with status of 200', (done) => {
     request(app).get('/')
-      .expect(200, res);
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        done();
+      });
   });
 
-  it('GET api/products should respond with a status of 200', (response) => {
+  it('Should GET api/products should respond with a status of 200', (done) => {
     request(app).get('/api/products')
-      .expect(200, response);
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        done();
+      });
   });
 
-  it('GET api/products/id should respond with a status of 200', (response) => {
+  it('Should GET api/products/id should respond with a status of 200', (done) => {
     request(app).get('/api/products/id?id=1')
-      .expect(200, response);
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        done();
+      });
   });
 
-  it('GET api/products/name should respond with a status of 200', (response) => {
+  it('Should GET api/products/name should respond with a status of 200', (done) => {
     request(app).get('/api/products/name?name=Maple+Syrup')
-      .expect(200, response);
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        done();
+      });
   });
 
-  it('POST api/products should respond with a status of 201', (response) => {
+  it('Should POST api/products should respond with a status of 201', (done) => {
     request(app).post('/api/products')
       .send(product)
-      .expect(201, response);
+      .then((response) => {
+        expect(response.statusCode).toBe(201);
+        done();
+      });
   });
 
-  it('PATCH api/products', (response) => {
+  it('Should PATCH api/products should respond with a status of 204', (done) => {
     request(app).patch('/api/products')
       .send(updatedProduct)
-      .expect(204, response);
+      .then((response) => {
+        expect(response.statusCode).toBe(204);
+        done();
+      });
   });
 
-  it('DELETE api/products/id?id=1001', (response) => {
-    request(app).delete('api/products/id?id=1001')
-      .expect(204, response);
+  it('Should DELETE api/products/id should respond with a status of 204', (done) => {
+    request(app).delete('/api/products/id?id=1001')
+      .then((response) => {
+        expect(response.statusCode).toBe(204);
+        done();
+      });
+  });
+});
+
+
+describe('Get requests should respond with requested data', () => {
+  it('Should return an object with the correct shape', (done) => {
+    request(app).get('/api/products/id?id=1001')
+      .then((response) => {
+        expect(response.body).toBeDefined();
+        expect(response.body.name).toBeDefined();
+        expect(response.body.price).toBeDefined();
+        expect(response.body.bulletOne).toBeDefined();
+        expect(response.body.bulletTwo).toBeDefined();
+        expect(response.body.bulletThree).toBeDefined();
+        expect(response.body.sellerName).toBeDefined();
+        expect(response.body.description).toBeDefined();
+        expect(response.body.productID).toBeDefined();
+        done();
+      });
+  });
+
+  it('Should return an object with the correct values', (done) => {
+    request(app).get('/api/products/id?id=1001')
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body.name).toBe('Sun Screen');
+        expect(response.body.price).toBe(5.99);
+        expect(response.body.bulletOne).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.');
+        expect(response.body.bulletTwo).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesen.');
+        expect(response.body.bulletThree).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+        expect(response.body.sellerName).toBe("I'm Out of Company Names");
+        expect(response.body.description).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusc.');
+        expect(response.body.productID).toBe(1001);
+        done();
+      });
   });
 });
