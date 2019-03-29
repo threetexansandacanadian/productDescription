@@ -2,7 +2,6 @@ const express = require('express');
 const db = require('../db/index.js');
 
 const app = express();
-const PORT = 65535;
 
 app.use(express.json({ urlencoded: true }));
 app.use(express.static('./dist/'));
@@ -15,7 +14,6 @@ app.get('/api/products', (req, res) => {
 
 app.get('/api/products/id', (req, res) => {
   const productId = req.query.id;
-  console.log(req.query);
   db.getOneById(productId)
     .then(result => res.send(result))
     .catch(() => res.end());
@@ -31,7 +29,9 @@ app.get('/api/products/name', (req, res) => {
 app.post('/api/products', (req, res) => {
   const product = req.body;
   db.addNew(product)
-    .then(() => res.send())
+    .then(() => {
+      res.sendStatus(201);
+    })
     .catch(() => res.end());
 });
 
@@ -40,7 +40,7 @@ app.patch('/api/products', (req, res) => {
   const product = req.body;
   delete product._id;
   db.updateEntry(productId, product)
-    .then(() => res.end())
+    .then(() => res.sendStatus(204))
     .catch(() => res.end());
 });
 
