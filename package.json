@@ -13,6 +13,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "tests": "jest --runInBand",
     "start": "webpack --config ./webpack.config.js -w --mode production",
     "server-dev": "nodemon server"
   },
@@ -34,7 +35,10 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.5.0",
     "nodemon": "^1.18.10",
+    "superagent": "^5.0.2",
+    "supertest": "^4.0.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
   },
