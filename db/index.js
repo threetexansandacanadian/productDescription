@@ -21,7 +21,9 @@ const addNew = (product) => {
   return newProduct.save();
 };
 
-const getOne = productId => Desc.findOne({ productID: productId });
+const getOneById = productId => Desc.findOne({ productID: productId });
+
+const getOneByName = productName => Desc.findOne({ name: productName });
 
 const getAll = () => Desc.find();
 
@@ -32,5 +34,5 @@ const removeEntry = productId => Desc.findOneAndDelete({ productID: productId })
 const massAddNew = products => Desc.insertMany(products);
 
 module.exports = {
-  addNew, getOne, getAll, updateEntry, removeEntry, massAddNew,
+  addNew, getOneById, getOneByName, getAll, updateEntry, removeEntry, massAddNew,
 };
