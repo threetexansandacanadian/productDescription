@@ -15,9 +15,16 @@ app.get('/api/products', (req, res) => {
 
 app.get('/api/products/id', (req, res) => {
   const productId = req.query.id;
-  db.getOne(productId)
+  db.getOneById(productId)
     .then(result => res.send(result))
-    .catch(res.end);
+    .catch(() => res.end());
+});
+
+app.get('/api/products/name', (req, res) => {
+  const productName = req.query.name;
+  db.getOneByName(productName)
+    .then(results => res.send(results))
+    .catch(() => res.end());
 });
 
 app.post('/api/products', (req, res) => {
