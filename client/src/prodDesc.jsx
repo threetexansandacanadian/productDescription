@@ -5,12 +5,18 @@ class ProdDesc extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProduct: this.getProduct(72)
+      currentProduct: this.getProductById(22)
     }
   }
 
-  getProduct(productId) {
+  getProductById(productId) {
     axios.get(`/api/products/id?id=${productId}`)
+    .then(result => this.setState({currentProduct: result.data}))
+    .catch(err => console.log(err))
+  }
+
+  getProductByName(productName) {
+    axios.get(`/api/products/name?name=${productName}`)
     .then(result => this.setState({currentProduct: result.data}))
     .catch(err => console.log(err))
   }
