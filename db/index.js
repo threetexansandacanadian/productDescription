@@ -1,8 +1,10 @@
 const moongoose = require('mongoose');
+require('dotenv').config();
 
 moongoose.Promise = global.Promise;
-moongoose.connect('mongodb://localhost/productDescription', { useNewUrlParser: true });
-
+// moongoose.connect('mongodb://localhost/productDescription', { useNewUrlParser: true });
+const uri = `mongodb+srv://nicholasmiron:${process.env.MONGO_DB_PASSWORD}@cluster0-ouctt.mongodb.net/products?retryWrites=true`;
+moongoose.connect(uri, { useNewUrlParser: true });
 const dbSchema = moongoose.Schema({
   name: 'String',
   price: 'Number',
