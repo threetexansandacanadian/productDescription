@@ -5,7 +5,7 @@ class ProdDesc extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProduct: this.getProductById(22)
+      currentProduct: this.getProductById(73)
     }
   }
 
