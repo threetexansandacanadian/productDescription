@@ -5,7 +5,7 @@ const db = require('../db/index.js');
 const app = express();
 
 app.use(express.json({ urlencoded: true }));
-app.use(express.static(path.join('__dirname', 'dist')));
+app.use(express.static('dist'));
 
 app.get('/api/products', (req, res) => {
   db.getAll()
