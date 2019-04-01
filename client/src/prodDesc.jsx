@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+
 class ProdDesc extends Component {
   constructor(props) {
     super(props);
@@ -10,13 +11,13 @@ class ProdDesc extends Component {
   }
 
   getProductById(productId) {
-    axios.get(`http://ec2-18-191-109-41.us-east-2.compute.amazonaws.com/api/products/id?id=${productId}`)
+    axios.get(`api/products/id?id=${productId}`)
     .then(result => this.setState({currentProduct: result.data}))
     .catch(err => console.log(err))
   }
 
   getProductByName(productName) {
-    axios.get(`http://ec2-18-191-109-41.us-east-2.compute.amazonaws.com/api/products/name?name=${productName}`)
+    axios.get(`api/products/name?name=${productName}`)
     .then(result => this.setState({currentProduct: result.data}))
     .catch(err => console.log(err))
   }
