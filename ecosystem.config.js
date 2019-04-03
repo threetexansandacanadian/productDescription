@@ -6,7 +6,7 @@ module.exports = {
   deploy: {
     production: {
       user: 'ubuntu',
-      host: 'ec2-18-191-109-41.us-east-2.compute.amazonaws.com',
+      host: 'ec2-18-222-205-81.us-east-2.compute.amazonaws.com',
       key: '~/.ssh/product-description.pem',
       ref: 'origin/master',
       repo: 'https://github.com/threetexansandacanadian/productDescription.git',
