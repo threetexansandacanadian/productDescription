@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-
-class ProdDesc extends Component {
+export default class ProdDesc extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProduct: this.getProductById(1)
+      currentProduct: {
+        "name": "Maple Syrup",
+        "price": "10.25",
+        "bulletOne": "Delicious Canadian Nectar",
+        "bulletTwo": "Great with cereal",
+        "bulletThree": "Getnly milked from the sturdiest of trees",
+        "sellerName": "Quebec",
+        "description": "This isn't aunt gemimas crap. The greatest thing since forever ago.",
+        "productID": "1"
+      }
     }
   }
 
@@ -45,5 +53,3 @@ class ProdDesc extends Component {
   }
   }
 }
-
-export default ProdDesc
