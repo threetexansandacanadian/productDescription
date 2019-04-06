@@ -5,21 +5,16 @@ export default class ProdDesc extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProduct: {
-        "name": "Maple Syrup",
-        "price": "10.25",
-        "bulletOne": "Delicious Canadian Nectar",
-        "bulletTwo": "Great with cereal",
-        "bulletThree": "Getnly milked from the sturdiest of trees",
-        "sellerName": "Quebec",
-        "description": "This isn't aunt gemimas crap. The greatest thing since forever ago.",
-        "productID": "1"
-      }
+      currentProduct: ''
     }
   }
 
+  componentDidMount() {
+    this.getProductById(2);
+  }
+  
   getProductById(productId) {
-    axios.get(`api/products/id?id=${productId}`)
+    axios.get(`http://localhost:3000/api/products/id?id=${productId}`)
     .then(result => this.setState({currentProduct: result.data}))
     .catch(err => console.log(err))
   }
@@ -33,7 +28,7 @@ export default class ProdDesc extends Component {
   render() {
     if (this.state.currentProduct) {
       return (
-        <>
+      <>
         <h1>{this.state.currentProduct.name}</h1>
         <h3>{this.state.currentProduct.sellerName}</h3>
         <h3>${this.state.currentProduct.price}</h3>
@@ -47,8 +42,8 @@ export default class ProdDesc extends Component {
     )
   } else {
     return (
-      <> 
-      </>
+      <div> 
+      </div>
     )
   }
   }
