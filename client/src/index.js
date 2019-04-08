@@ -1,3 +1,3 @@
-import ProdDesc from './prodDesc.jsx';
+import ProdDesc from './prodDesc.js';
 
 window.ProdDesc = ProdDesc;
