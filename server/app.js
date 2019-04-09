@@ -17,7 +17,7 @@ app.use(morgan('dev'));
 // app.use(express.json({ urlencoded: true }));
 app.use(express.static('dist'));
 
-app.get('api/products', (req, res) => {
+app.get('/api/products', (req, res) => {
   db.getAll()
     .then(results => res.send(results))
     .catch(err => res.send('Failed to get all', err));
