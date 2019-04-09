@@ -24,7 +24,7 @@ export default class ProdDesc extends Component {
   }
 
   getProductById(productId) {
-    axios.get(`http://localhost:3000/api/products/id?id=${productId}`)
+    axios.get(`/api/products/id?id=${productId}`)
     .then(result => this.setState({currentProduct: result.data}))
     .catch(err => console.log(err))
   }
