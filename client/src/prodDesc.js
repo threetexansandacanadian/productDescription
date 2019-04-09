@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-
-console.log('I hate deployment')
 export default class ProdDesc extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +51,6 @@ export default class ProdDesc extends Component {
   } else {
     return (
       <div> 
-        <p>Failure</p>
       </div>
     )
   }
