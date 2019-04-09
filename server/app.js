@@ -27,7 +27,10 @@ app.get('/api/products/id', (req, res) => {
   const productId = req.query.id;
   db.getOneById(productId)
     .then(result => res.send(result))
-    .catch(() => res.end());
+    .catch((err) => {
+      console.log(err);
+      res.end();
+    });
 });
 
 app.get('/api/products/name', (req, res) => {
@@ -43,7 +46,10 @@ app.post('/api/products', (req, res) => {
     .then(() => {
       res.sendStatus(201);
     })
-    .catch(() => res.end());
+    .catch((err) => {
+      console.log(err);
+      res.end();
+    });
 });
 
 app.patch('/api/products', (req, res) => {
