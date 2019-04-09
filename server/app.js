@@ -14,7 +14,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(express.json({ urlencoded: true }));
+app.use(express.json({ urlencoded: true }));
 app.use(express.static('dist'));
 
 app.get('/api/products', (req, res) => {
