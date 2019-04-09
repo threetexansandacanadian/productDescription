@@ -15,7 +15,6 @@ export default class ProdDesc extends Component {
 
   componentDidMount() {
     this.getProductById(this.state.currentProductID);
-    // this.getProductByName('Maple Syrup');
     window.addEventListener('updateProdId', this.handleUpdateProdId.bind(this))
   }
   
@@ -35,10 +34,6 @@ export default class ProdDesc extends Component {
     .catch(err => console.log(err))
   }
 
-  // dispatchButtonClick(e) {
-  //   window.dispatchEvent(new CustomEvent('updateProdId', {detail: 3}));
-  // }
-
   render() {
     if (this.state.currentProduct) {
       return (
@@ -52,7 +47,6 @@ export default class ProdDesc extends Component {
           <li>{this.state.currentProduct.bulletThree}</li>
         </ul>
         <p>{this.state.currentProduct.description}</p>
-        {/* <button type='button' onClick={this.dispatchButtonClick.bind(this)}>hi</button> */}
       </div>
     )
   } else {
