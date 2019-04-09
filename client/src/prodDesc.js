@@ -23,13 +23,13 @@ export default class ProdDesc extends Component {
   }
 
   getProductById(productId) {
-    axios.get(`http://localhost:3000/api/products/id?id=${productId}`)
+    axios.get(`/api/products/id?id=${productId}`)
     .then(result => this.setState({currentProduct: result.data}))
     .catch(err => console.log(err))
   }
 
   getProductByName(productName) {
-    axios.get(`http://localhost:3000/api/products/name?name=${productName}`)
+    axios.get(`/api/products/name?name=${productName}`)
     .then(result => this.setState({currentProduct: result.data}))
     .catch(err => console.log(err))
   }
