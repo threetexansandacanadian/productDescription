@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 //   next();
 // });
 
-// app.use(express.json({ urlencoded: true }));
+app.use(express.json({ urlencoded: true }));
 app.use(express.static('dist'));
 
 app.get('/api/products', (req, res) => {
@@ -55,7 +55,7 @@ app.patch('/api/products', (req, res) => {
   delete product._id;
   db.updateEntry(productId, product)
     .then(() => res.sendStatus(204))
-    .catch(err => res.send(err, product, productId));
+    .catch(() => res.end());
 });
 
 app.delete('/api/products/id', (req, res) => {
