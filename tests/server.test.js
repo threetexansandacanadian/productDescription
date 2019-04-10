@@ -102,7 +102,7 @@ describe('Get requests should respond with requested data', () => {
   });
 
   it('Should return an object with the correct shape', (done) => {
-    request(app).get('/api/products/name?name=Sun+Shade')
+    request(app).get('/api/products/name?name=Sun+Screen')
       .then((response) => {
         expect(response.body).toBeDefined();
         expect(response.body.name).toBeDefined();
@@ -118,33 +118,33 @@ describe('Get requests should respond with requested data', () => {
   });
 
   it('Should return an object with the correct values', (done) => {
-    request(app).get('/api/products/id?id=9999')
+    request(app).get('/api/products/id?id=100')
       .then((response) => {
         expect(response.statusCode).toBe(200);
-        expect(response.body.name).toBe('Sun Shade');
+        expect(response.body.name).toBe('Sun Screen');
         expect(response.body.price).toBe(5.99);
         expect(response.body.bulletOne).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.');
         expect(response.body.bulletTwo).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesen.');
         expect(response.body.bulletThree).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
         expect(response.body.sellerName).toBe("I'm Out of Company Names");
         expect(response.body.description).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusc.');
-        expect(response.body.productID).toBe(9999);
+        expect(response.body.productID).toBe(100);
         done();
       });
   });
 
   it('Should return an object with the correct values', (done) => {
-    request(app).get('/api/products/name?name=Sun+Shade')
+    request(app).get('/api/products/name?name=Sun+Screen')
       .then((response) => {
         expect(response.statusCode).toBe(200);
-        expect(response.body.name).toBe('Sun Shade');
+        expect(response.body.name).toBe('Sun Screen');
         expect(response.body.price).toBe(5.99);
         expect(response.body.bulletOne).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.');
         expect(response.body.bulletTwo).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesen.');
         expect(response.body.bulletThree).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
         expect(response.body.sellerName).toBe("I'm Out of Company Names");
         expect(response.body.description).toBe('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusc.');
-        expect(response.body.productID).toBe(9999);
+        expect(response.body.productID).toBe(100);
         done();
       });
   });
