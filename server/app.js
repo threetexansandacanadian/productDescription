@@ -58,7 +58,7 @@ app.patch('/api/products', (req, res) => {
   delete product._id;
   db.updateEntry(productId, product)
     .then(() => res.sendStatus(204))
-    .catch(err => res.end(err));
+    .catch(err => res.send(err));
 });
 
 app.delete('/api/products/id', (req, res) => {
