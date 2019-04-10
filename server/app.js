@@ -27,10 +27,7 @@ app.get('/api/products/id', (req, res) => {
   const productId = req.query.id;
   db.getOneById(productId)
     .then(result => res.send(result))
-    .catch((err) => {
-      console.log(err);
-      res.end();
-    });
+    .catch(() => res.end());
 });
 
 app.get('/api/products/name', (req, res) => {
@@ -58,7 +55,7 @@ app.patch('/api/products', (req, res) => {
   delete product._id;
   db.updateEntry(productId, product)
     .then(() => res.sendStatus(204))
-    .catch(err => res.send(err));
+    .catch(err => res.send(err, product, productId));
 });
 
 app.delete('/api/products/id', (req, res) => {
