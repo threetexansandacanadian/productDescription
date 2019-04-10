@@ -14,8 +14,9 @@
   },
   "scripts": {
     "tests": "jest --runInBand --detectOpenHandles --bail --forceExit",
-    "start": "webpack --config ./webpack.config.js -w --mode production",
-    "server-dev": "nodemon server"
+    "build": "webpack --config ./webpack.config.js -w --mode production",
+    "build-one": webpack --config ./webpack.conf.js --mode production",
+    "start": "nodemon server"
   },
   "dependencies": {
     "axios": "^0.18.0",

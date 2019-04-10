@@ -11,7 +11,7 @@ module.exports = {
       ref: 'origin/master',
       repo: 'https://github.com/threetexansandacanadian/productDescription.git',
       path: '/home/ubuntu/productDescription',
-      'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js',
+      'post-deploy': 'npm install && npm run build-one && pm2 startOrRestart ecosystem.config.js',
     },
   },
 };
