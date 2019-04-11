@@ -10,10 +10,10 @@
     "url": "https://github.com/threetexansandacanadian/productDescription.git"
   },
   "engines": {
-    "node": ">=6.13.0"
+    "node": ">=11.12"
   },
   "scripts": {
-    "tests": "jest --runInBand --detectOpenHandles --bail --forceExit",
+    "test": "jest --runInBand --detectOpenHandles --bail --forceExit",
     "build": "webpack --config ./webpack.config.js -w --mode production",
     "build-one": "webpack --config ./webpack.config.js --mode production",
     "start": "nodemon server"

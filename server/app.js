@@ -8,12 +8,6 @@ const app = express();
 app.use(cors());
 app.use(morgan('dev'));
 
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   next();
-// });
-
 app.use(express.json({ urlencoded: true }));
 app.use(express.static('dist'));
 
@@ -44,7 +38,6 @@ app.post('/api/products', (req, res) => {
       res.sendStatus(201);
     })
     .catch((err) => {
-      console.log(err);
       res.end();
     });
 });
