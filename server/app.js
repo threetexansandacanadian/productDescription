@@ -1,12 +1,12 @@
 const express = require('express');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const cors = require('cors');
 const db = require('../db/index.js');
 
 const app = express();
 
 app.use(cors());
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 
 app.use(express.json({ urlencoded: true }));
 app.use(express.static('dist'));
