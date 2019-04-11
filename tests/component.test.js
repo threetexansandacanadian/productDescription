@@ -1,10 +1,12 @@
-import Enzyme, {shallow, mount, render} from 'enzyme';
+import Enzyme, {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import ProdDesc from '../client/src/prodDesc.js';
 import { doesNotReject } from 'assert';
 
 Enzyme.configure({ adapter: new Adapter() });
+
+const regeneratorRuntime = require("regenerator-runtime");
 
 const { JSDOM } = require('jsdom');
 
@@ -35,17 +37,35 @@ describe('Product description rendering', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<ProdDesc />);
+    // async () => {
+      wrapper = mount(<ProdDesc />);
+    // //  ? await wrapper.instance().componentDidMount();
+    // }
+
   })
 
   it('Should mount correctly', () => {
     expect(wrapper).toMatchSnapshot();
   })
 
-  it('Should have h1', () => {
+  it('Should call componentDidMount', () => {
+    const eyeSpy = jest.spyOn(ProdDesc.prototype, 'componentDidMount');
+    wrapper = mount(<ProdDesc />);
+    expect(eyeSpy).toHaveBeenCalled();
+    eyeSpy.mockClear();
+  })
+
+  it('Should have h1', async () => {
+    wrapper = mount(<ProdDesc />);
+    await wrapper.instance().componentDidMount();
+    // wrapper.update();
+    // wrapper.instance().forceUpdate();
+    
     expect(
-      wrapper
-    ).toBe(1);
+      // wrapper.contains(<p>Hi</p>)
+      wrapper.contains(<p>Hello</p>)
+      // wrapper.contains(<h1>Maple Syrup</h1>)
+    ).toBe(true);
   })
 
 

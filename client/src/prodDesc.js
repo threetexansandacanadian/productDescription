@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+
 export default class ProdDesc extends Component {
   constructor(props) {
     super(props);
@@ -36,23 +37,25 @@ export default class ProdDesc extends Component {
   render() {
     if (this.state.currentProduct) {
       return (
-      <div className={'prodIdSubscriber'} ref={el => (this.div = el)}>
-        <h1>{this.state.currentProduct.name}</h1>
-        <h3>{this.state.currentProduct.sellerName}</h3>
-        <h3>${this.state.currentProduct.price}</h3>
-        <ul>
-          <li>{this.state.currentProduct.bulletOne}</li>
-          <li>{this.state.currentProduct.bulletTwo}</li>
-          <li>{this.state.currentProduct.bulletThree}</li>
-        </ul>
-        <p>{this.state.currentProduct.description}</p>
-      </div>
-    )
-  } else {
-    return (
-      <div> 
-      </div>
-    )
-  }
+        <div className='prodIdSubscriber' ref={el => (this.div = el)}>
+          <p>Hi</p>
+          <h1>{this.state.currentProduct.name}</h1>
+          <h3>{this.state.currentProduct.sellerName}</h3>
+          <h3>${this.state.currentProduct.price}</h3>
+          <ul>
+            <li>{this.state.currentProduct.bulletOne}</li>
+            <li>{this.state.currentProduct.bulletTwo}</li>
+            <li>{this.state.currentProduct.bulletThree}</li>
+          </ul>
+          <p>{this.state.currentProduct.description}</p>
+        </div>
+      )
+    } else {
+      return (
+        <div> 
+          <p>Hello</p>
+        </div>
+      )
+    }
   }
 }
