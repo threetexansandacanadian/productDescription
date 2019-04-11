@@ -1,6 +1,52 @@
+import Enzyme, {shallow, mount, render} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import React from 'react';
+import ProdDesc from '../client/src/prodDesc.js';
+import { doesNotReject } from 'assert';
 
-describe('Product Description Component Stuff', () => {
-  it('should pass', () => {
-    expect(true).toBe(true);
+Enzyme.configure({ adapter: new Adapter() });
+
+const { JSDOM } = require('jsdom');
+
+const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const { window } = jsdom;
+
+function copyProps(src, target) {
+  Object.defineProperties(target, {
+    ...Object.getOwnPropertyDescriptors(src),
+    ...Object.getOwnPropertyDescriptors(target),
   });
+}
+
+global.window = window;
+global.document = window.document;
+global.navigator = {
+  userAgent: 'node.js',
+};
+global.requestAnimationFrame = function (callback) {
+  return setTimeout(callback, 0);
+};
+global.cancelAnimationFrame = function (id) {
+  clearTimeout(id);
+};
+copyProps(window, global);
+
+describe('Product description rendering', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = mount(<ProdDesc />);
+  })
+
+  it('Should mount correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  })
+
+  it('Should have h1', () => {
+    expect(
+      wrapper
+    ).toBe(1);
+  })
+
+
 });
