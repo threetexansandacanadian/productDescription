@@ -37,8 +37,7 @@ export default class ProdDesc extends Component {
   render() {
     if (this.state.currentProduct) {
       return (
-        <div className='prodIdSubscriber' ref={el => (this.div = el)}>
-          <p>Hi</p>
+        <div className='prodIdSubscriber' ref={el => (this.div = el)}>  
           <h1>{this.state.currentProduct.name}</h1>
           <h3>{this.state.currentProduct.sellerName}</h3>
           <h3>${this.state.currentProduct.price}</h3>
@@ -53,7 +52,6 @@ export default class ProdDesc extends Component {
     } else {
       return (
         <div> 
-          <p>Hello</p>
         </div>
       )
     }
