@@ -6,7 +6,8 @@ export default class ProdDesc extends Component {
     super(props);
     this.state = {
       currentProduct: '',
-      currentProductID: 1
+      currentProductID: 1,
+      reviews: 0
     }
     this.handleUpdateProdId.bind(this);
     this.getProductById.bind(this);
@@ -15,16 +16,33 @@ export default class ProdDesc extends Component {
 
   componentDidMount() {
     this.getProductById(this.state.currentProductID);
+    this.getReviewById(this.state.currentProductID);
     window.addEventListener('updateProdId', this.handleUpdateProdId.bind(this))
   }
   
   handleUpdateProdId(e) {
-    this.setState({currentProductID: e.detail}, () => this.getProductById(this.state.currentProductID))
+    this.setState({currentProductID: e.detail}, () => {
+      this.getProductById(this.state.currentProductID);
+      this.getReviewById(this.state.currentProductID);
+    })
+  }
+
+  getReviewById(productId) {
+    axios.get(`http://ec2-54-224-251-247.compute-1.amazonaws.com/api/reviews`)
+    .then(result => this.setState({reviews: result.data}))
+    .catch(err => console.log(err))
   }
 
   getProductById(productId) {
     axios.get(`http://ec2-18-222-205-81.us-east-2.compute.amazonaws.com/api/products/id?id=${productId}`)
-    .then(result => this.setState({currentProduct: result.data}))
+    .then(result => {
+      let starSum = 0;
+      result.data.rows.forEach(review => {
+        starSum += review.stars
+      });
+      let starAvg = starSum / result.data.rowCount;
+      console.log(starAvg);
+    })
     .catch(err => console.log(err))
   }
 
