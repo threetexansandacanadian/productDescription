@@ -4,10 +4,13 @@ import React from 'react';
 import ProdDesc from '../client/src/prodDesc.js';
 import { doesNotReject } from 'assert';
 
+//Allows use of enzyme
 Enzyme.configure({ adapter: new Adapter() });
 
-const regeneratorRuntime = require("regenerator-runtime");
+//Allows use of async await
+// const regeneratorRuntime = require("regenerator-runtime");
 
+//Allows enzyme to use window
 const { JSDOM } = require('jsdom');
 
 const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
@@ -56,7 +59,7 @@ describe('Product description rendering', () => {
   })
 
   it('Should rerender when state is changed', () => {
-    wrapper = mount(<ProdDesc />);
+    wrapper = shallow(<ProdDesc />);
     wrapper.setState({currentProduct: {
       "_id": "5c9fa1b880b8c118ff22fb9f",
       "name": "Maple Syrup",
@@ -68,7 +71,7 @@ describe('Product description rendering', () => {
       "description": "This isn't aunt gemimas crap. The greatest thing since forever ago.",
       "productID": 1,
       "__v": 0
-  }});
+    }});
     
     expect(wrapper.contains(<h1>Maple Syrup</h1>)).toBe(true);
     expect(wrapper.contains(<h3>Quebec</h3>)).toBe(true);
@@ -78,6 +81,16 @@ describe('Product description rendering', () => {
     expect(wrapper.contains(<li>Getnly milked from the sturdiest of trees</li>)).toBe(true);
     expect(wrapper.contains(<p>This isn't aunt gemimas crap. The greatest thing since forever ago.</p>));
   })
+
+  // it('Should load default product after componentDidMount', (done) => {
+  //   wrapper = mount(<ProdDesc />);
+
+  //   process.nextTick( () => {
+  //     wrapper.update();
+  //     expect(wrapper.contains(<h1>Maple Syrup</h1>)).toBe(true);
+  //     done();
+  //   })
+  // })
 
 
 });
