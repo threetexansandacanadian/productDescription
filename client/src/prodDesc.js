@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactStars from 'react-stars';
 import axios from 'axios';
 
 export default class ProdDesc extends Component {
@@ -7,7 +8,7 @@ export default class ProdDesc extends Component {
     this.state = {
       currentProduct: '',
       currentProductID: 1,
-      reviews: 0
+      reviewStars: 0
     }
     this.handleUpdateProdId.bind(this);
     this.getProductById.bind(this);
@@ -35,7 +36,7 @@ export default class ProdDesc extends Component {
         starSum += review.stars
       })
       let starAvg = starSum / result.data.rowCount;
-      console.log(starAvg);
+      this.setState({reviewStars: starAvg});
     })
     .catch(err => console.log(err))
   }
@@ -59,6 +60,7 @@ export default class ProdDesc extends Component {
           <h1>{this.state.currentProduct.name}</h1>
           <h3>{this.state.currentProduct.sellerName}</h3>
           <h3>${this.state.currentProduct.price}</h3>
+          <ReactStars count={5} value={this.state.reviewStars} size={15} color={'#FFDF00'} half={true} edit={false}/>
           <ul>
             <li>{this.state.currentProduct.bulletOne}</li>
             <li>{this.state.currentProduct.bulletTwo}</li>

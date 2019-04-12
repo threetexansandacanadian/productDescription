@@ -28,7 +28,8 @@
     "mongoose": "^5.4.20",
     "morgan": "^1.9.1",
     "react": "^16.8.5",
-    "react-dom": "^16.8.5"
+    "react-dom": "^16.8.5",
+    "react-stars": "^2.2.5"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
@@ -58,6 +59,8 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
-    "setupFiles": ["./src/setupTests.js"]
+    "setupFiles": [
+      "./src/setupTests.js"
+    ]
   }
 }
