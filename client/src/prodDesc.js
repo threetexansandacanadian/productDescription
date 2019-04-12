@@ -53,10 +53,15 @@ export default class ProdDesc extends Component {
     .catch(err => console.log(err))
   }
 
+  handleBuy(e) {
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent('buyItem', {detail: this.state.currentProduct}))
+  }
+
   render() {
     if (this.state.currentProduct) {
       return (
-        <div className='prodIdSubscriber' ref={el => (this.div = el)}>  
+        <div>  
           <h1>{this.state.currentProduct.name}</h1>
           <h3>{this.state.currentProduct.sellerName}</h3>
           <h3>${this.state.currentProduct.price}</h3>
@@ -67,6 +72,7 @@ export default class ProdDesc extends Component {
             <li>{this.state.currentProduct.bulletThree}</li>
           </ul>
           <p>{this.state.currentProduct.description}</p>
+          <button onClick={this.handleBuy.bind(this)}>Buy Me!</button> 
         </div>
       )
     } else {
