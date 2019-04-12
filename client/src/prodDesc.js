@@ -28,21 +28,21 @@ export default class ProdDesc extends Component {
   }
 
   getReviewById(productId) {
-    axios.get(`http://ec2-54-224-251-247.compute-1.amazonaws.com/api/reviews`)
-    .then(result => this.setState({reviews: result.data}))
+    axios.get('http://ec2-54-224-251-247.compute-1.amazonaws.com/api/reviews', {headers: {productid: productId}})
+    .then(result => {
+      let starSum = 0;
+      result.data.rows.forEach(review => {
+        starSum += review.stars
+      })
+      let starAvg = starSum / result.data.rowCount;
+      console.log(starAvg);
+    })
     .catch(err => console.log(err))
   }
 
   getProductById(productId) {
     axios.get(`http://ec2-18-222-205-81.us-east-2.compute.amazonaws.com/api/products/id?id=${productId}`)
-    .then(result => {
-      let starSum = 0;
-      result.data.rows.forEach(review => {
-        starSum += review.stars
-      });
-      let starAvg = starSum / result.data.rowCount;
-      console.log(starAvg);
-    })
+    .then(result => this.setState({currentProduct: result.data}))
     .catch(err => console.log(err))
   }
 
