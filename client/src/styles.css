@@ -1,13 +1,17 @@
 #productDescription {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(10, 1fr);
 
 }
 
-.productTitle {
+.productTitle, .bullets, .description {
   grid-column: 1 / -1;
 }
 
-.bullets, .description, .buyButton {
+.buyButton, .productPrice {
   grid-column: 1;
+}
+
+.buyButton {
+  width: 100px;
 }
