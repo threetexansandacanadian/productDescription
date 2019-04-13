@@ -1,7 +1,6 @@
 #productDescription {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-
 }
 
 .productTitle, .bullets, .description {
@@ -10,6 +9,10 @@
 
 .buyButton, .productPrice {
   grid-column: 1;
+}
+
+.productSeller, .productReviews {
+  grid-column: span 2;
 }
 
 .buyButton {
