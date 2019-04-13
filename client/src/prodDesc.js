@@ -64,7 +64,7 @@ export default class ProdDesc extends Component {
       return (
         <div id='productDescription'>  
           <h1 className='productTitle'>{this.state.currentProduct.name}</h1>
-          <ReactStars count={5} value={this.state.reviewStars} size={15} color={'#FFDF00'} half={true} edit={false}/>
+          <ReactStars className='stars' count={5} value={this.state.reviewStars} size={15} color={'#FFDF00'} half={true} edit={false}/>
           <div className='productReviews'>{this.state.reviewCount} Reviews</div>
           <div className='productSeller'>{this.state.currentProduct.sellerName}</div>
           <div className='productPrice'>${this.state.currentProduct.price}</div>

@@ -22,6 +22,10 @@
   border:none;
 }
 
+.stars {
+  z-index: -1;
+}
+
 .buyButton:hover {
   background-color: #ff9a00;
 }
