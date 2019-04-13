@@ -15,9 +15,6 @@
   grid-column: span 2;
 }
 .buyButton {
+  width: 120px;
   grid-column: 1 / span 2;
-}
-
-.buyButton {
-  width: 100px;
 }
