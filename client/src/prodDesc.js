@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactStars from 'react-stars';
 import axios from 'axios';
+import './styles.css';
 
 export default class ProdDesc extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ export default class ProdDesc extends Component {
         starSum += review.stars
       })
       let starAvg = starSum / result.data.rowCount;
-      this.setState({reviewStars: starAvg});
+      this.setState({reviewStars: starAvg, reviewCount: result.data.rowCount});
     })
     .catch(err => console.log(err))
   }
@@ -61,18 +62,19 @@ export default class ProdDesc extends Component {
   render() {
     if (this.state.currentProduct) {
       return (
-        <div>  
-          <h1>{this.state.currentProduct.name}</h1>
+        <div id='productDescription'>  
+          <h1 className='productTitle'>{this.state.currentProduct.name}</h1>
+          <ReactStars count={5} value={this.state.reviewStars} size={15} color={'#FFDF00'} half={true} edit={false}/>
+          <h3>{this.state.reviewCount} Reviews</h3>
           <h3>{this.state.currentProduct.sellerName}</h3>
           <h3>${this.state.currentProduct.price}</h3>
-          <ReactStars count={5} value={this.state.reviewStars} size={15} color={'#FFDF00'} half={true} edit={false}/>
-          <ul>
+          <ul className='bullets'>
             <li>{this.state.currentProduct.bulletOne}</li>
             <li>{this.state.currentProduct.bulletTwo}</li>
             <li>{this.state.currentProduct.bulletThree}</li>
           </ul>
-          <p>{this.state.currentProduct.description}</p>
-          <button onClick={this.handleBuy.bind(this)}>Buy Me!</button> 
+          <p className='description'>{this.state.currentProduct.description}</p>
+          <button className='buyButton' onClick={this.handleBuy.bind(this)}>Buy Me!</button> 
         </div>
       )
     } else {
